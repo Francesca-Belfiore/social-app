@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Francesca-Belfiore/social-app/static/css/main.ce9a1461.chunk.css",
+    "main.js": "/Francesca-Belfiore/social-app/static/js/main.2aca3ded.chunk.js",
+    "main.js.map": "/Francesca-Belfiore/social-app/static/js/main.2aca3ded.chunk.js.map",
+    "runtime-main.js": "/Francesca-Belfiore/social-app/static/js/runtime-main.238c2400.js",
+    "runtime-main.js.map": "/Francesca-Belfiore/social-app/static/js/runtime-main.238c2400.js.map",
+    "static/js/2.3738269c.chunk.js": "/Francesca-Belfiore/social-app/static/js/2.3738269c.chunk.js",
+    "static/js/2.3738269c.chunk.js.map": "/Francesca-Belfiore/social-app/static/js/2.3738269c.chunk.js.map",
+    "static/js/3.cbe74efc.chunk.js": "/Francesca-Belfiore/social-app/static/js/3.cbe74efc.chunk.js",
+    "static/js/3.cbe74efc.chunk.js.map": "/Francesca-Belfiore/social-app/static/js/3.cbe74efc.chunk.js.map",
+    "index.html": "/Francesca-Belfiore/social-app/index.html",
+    "static/css/main.ce9a1461.chunk.css.map": "/Francesca-Belfiore/social-app/static/css/main.ce9a1461.chunk.css.map",
+    "static/js/2.3738269c.chunk.js.LICENSE.txt": "/Francesca-Belfiore/social-app/static/js/2.3738269c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.238c2400.js",
+    "static/js/2.3738269c.chunk.js",
+    "static/css/main.ce9a1461.chunk.css",
+    "static/js/main.2aca3ded.chunk.js"
+  ]
+}
