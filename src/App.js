@@ -1,6 +1,6 @@
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer/index.js';
+import Header from './components/Header/index.jsx';
+import Footer from './components/Footer/index.jsx';
 //viene risolto in quattro modi:
 //- ha trovato ./components/Footer.js
 //- ha trovato ./components/Footer.jsx
@@ -22,6 +22,7 @@ function App() {
   return (
     <div>
       <Header name={name} links={nav}/>
+      <p>Lorem ipsum</p>
       <Footer/>
     </div>
   );

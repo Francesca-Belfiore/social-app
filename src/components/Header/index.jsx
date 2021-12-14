@@ -2,6 +2,8 @@
 //I componenti sono dei tag custom, pertanto html ci dà
 //già una linea guida su come costruire un componente.
 
+import styles from "./Header.module.scss"
+
 const Header = (props) => {
 //props è un oggetto che contiene tutti gli attributi
 //che vengono passati sul tag del componente.
@@ -14,7 +16,7 @@ const Header = (props) => {
     //sotto nei nomi degli attributi (props.name, props.links).
 
     return (
-        <header>
+        <header className={styles.header}>
             <h1>{name}</h1>
             <nav>
                 <ul>
@@ -27,7 +29,7 @@ const Header = (props) => {
                             se non far sparire l'errore in console.
                             Ovviamente la key va messa nel tag più
                             alto dell'elemento ripetuto.*/}
-                            <a href={item.link}>{item.label}</a>
+                            <a className="active" href={item.link}>{item.label}</a>
                         </li>
                     ))}
                 </ul>
