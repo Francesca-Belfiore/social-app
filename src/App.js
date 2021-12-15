@@ -11,6 +11,9 @@ import Footer from './components/Footer/index.jsx';
 //a livello di funzionalità, ma scrivere jsx lo rende
 //riconoscibile e distinguibile dalla logica ad occhio
 
+import Home from "./pages/Home/index.jsx";
+
+
 function App() {
   const name = "Feisbrut";
   const nav = [
@@ -22,7 +25,7 @@ function App() {
   return (
     <div>
       <Header name={name} links={nav}/>
-      <p>Lorem ipsum</p>
+      <Home/>
       <Footer/>
     </div>
   );
