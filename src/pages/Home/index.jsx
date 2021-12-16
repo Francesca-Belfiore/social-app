@@ -1,41 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Home.module.scss";
 import FriendPreview from "../../components/FriendPreview";
 import MessagePreview from "../../components/MessagePreview";
 import Post from "../../components/Post";
+import { http } from "./../../libs/http.js";
 
-const friends = [
-    { name: "Chandler", photo: "https://randomuser.me/api/portraits/lego/5.jpg"},
-    { name: "Pippo", photo: "https://randomuser.me/api/portraits/lego/7.jpg"},
-    { name: "Geralt", photo: "https://randomuser.me/api/portraits/lego/8.jpg"},
-];
+const friends = [];
 
-const messages = [
-    { text: "lorem ipsum", date: new Date(), sender: "Pippo"},
-    { text: "bau bau", date: new Date(), sender: "Pluto"},
-    { text: "yoooo", date: new Date(), sender: "V"},
-    { text: "finish the fight", date: new Date(), sender: "Master Chief"},
-    { text: "this cave is not a natural formation", date: new Date(), sender: "Cortana"},
-];
+const messages = [];
 
-const posts = [
-    { author: "User", text: "Oggi ho mangiato roba buona", date: new Date(), photo: "https://images.unsplash.com/photo-1620481679288-0c3894901bcf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=80" },
-    { author: "User", text: "Sto imparando React", date: new Date(), photo: "" }
-];
+const posts = [];
 
 const Home = () => {
 
+    const [allPosts, setAllPosts] = useState(posts);
+    const [messagesPreview, setMessagesPreview] = useState(messages);
     const [friendsPreview, setFriendsPreview] = useState(friends);
     //è come scrivere const friendPreview = [];
     //ma più efficiente. Sarà una funzione monitorata
-    //da react, di cui friendPreview è il getter (da
-    //dove vengono presi i dati da passare). Come buona 
-    //abitudine se ho chiamato il getter friendsPreview 
-    //chiamerò il setter setFriendsPreview.
-    //Il setter cambia il valore dei dati del getter.
-    const [allPosts, setAllPosts] = useState(posts);
-    const [messagePreview, setMessagePreview] = useState(messages);
+    //da react, di cui friendPreview è il getter.
 
+    //Come buona abitudine se ho chiamato il getter 
+    //friendsPreview chiamerò il setter setFriendsPreview.
+
+    //GETTER -> const friendPreview = []
+    //il getter costituisce il valore iniziale
+    //SETTER -> firenPreview = [...]
+    //Il setter cambia il valore dei dati del getter.
+
+    // fetch("https://edgemony-backend.herokuapp.com/friends?_limit=4")
+    //     .then((response) => response.json())
+    //     .then((data) => console.log(data))
+    //così però la fetch viene eseguita due volte: dobbiamo 
+    //importare l'hook useEffect per lavorare sugli "eventi" 
+    //dell'evento (creazione, aggiornamento, fine evento...)
+
+    //Esegue il condice quando il componente è inizializzato
+    //E'equivalante a DOMContentLoaded ma per il componente.
+    //componentDidMount() era il vecchio nome della funzione
+    
+    //così aggiorniamo solo un elemento della pagina ma per
+    //farlo "automaticamnte" abbiamo dovuto crearci uno stato
+    //interno e settarlo con useEffect.
+    useEffect(() => {
+        http("/friends?_limit=4").then((data) => setFriendsPreview(data));
+
+        http("/messages?_limit=4").then((data) => setMessagesPreview(data));
+
+        http("/posts").then((data) => setAllPosts(data));
+    }, []);
+
+    //così gli elementi vengono caricati man mano che le chiamate rispondono
+    //(hanno tempi diversi). Nel caso serva caricare tutto assieme e solo
+    //dopo renderizzare gli elementi si poteva usare:
+    //Promise.all([
+    //     http("/friends?_limit=4"),
+    //     http("/messages?_limit=4"),
+    //     http("/posts")
+    // ]).then((data) => console.log(data[0]))
+    //Promise.all è un array di promises e restituisce data non singolarmente
+    //ma in un array indicizzato nell'ordine in cui sono state fatte le fetch
 
     return (
         <section className={styles.home}>
@@ -43,7 +67,7 @@ const Home = () => {
             <div className={styles.grid}>
                 <aside>
                     {friendsPreview.map((friend, index) => (
-                        <FriendPreview key={index} data={friend} className={styles.friend}/>
+                        <FriendPreview key={index} data={friend}/>
                     ))}                    
                 </aside>
                 <main>
@@ -52,7 +76,7 @@ const Home = () => {
                     ))}
                 </main>
                 <aside>
-                    {messagePreview.map((message, index) => (
+                    {messagesPreview.map((message, index) => (
                         <MessagePreview key={index} data={message} />
                     ))}
                 </aside>

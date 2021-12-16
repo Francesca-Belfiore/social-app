@@ -1,4 +1,5 @@
 import styles from "./Post.module.scss";
+import RelativeDate from "../date";
 
 const Post = (props) => {
     const data = props.data || {
@@ -12,7 +13,7 @@ const Post = (props) => {
     return (
         <article className={styles.post}>
             <h3>{data.author}</h3>
-            <p><small>{data.date.toLocaleDateString()} - {data.date.toLocaleTimeString()}</small></p>
+            <RelativeDate date={data.date}/>
             <p>{data.text}</p>
 
             {data.photo ? <img src={data.photo} alt={data.author} /> : <></> }
