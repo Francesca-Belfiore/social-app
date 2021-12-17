@@ -29,8 +29,8 @@ const INIT_STATE = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // case "change-name":
-    //   return { ...state, name: "Feisbell" }; 
+    case "change-name":
+      return { ...state, name: "Feisbell" }; 
       //creo un nuovo state col nome cambiato
     default:
       return state;
@@ -39,8 +39,7 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  const [state] = useReducer(reducer, INIT_STATE);
-  // const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const [state, dispatch] = useReducer(reducer, INIT_STATE);
   //useReducer è come useState ma esplicito
   //il dispatch fa partire l'evento
   //il reducer è come se fosse un event listener
@@ -55,8 +54,8 @@ function App() {
     <div>
       <Header name={state.name} links={state.nav}/>
 
-      {/* <button onClick={() => dispatch({type:"change-name"})}>Cambia nome</button>
-      esempio bottone che cambia titolo alla pagina con useReducer */}
+      <button onClick={() => dispatch({type:"change-name"})}>Cambia nome</button>
+      {/* esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
         <Route path="/social-app" element={ <Home/> }/>
