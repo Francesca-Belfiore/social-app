@@ -3,6 +3,7 @@
 //già una linea guida su come costruire un componente.
 
 import styles from "./Header.module.scss"
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const Header = (props) => {
 //props è un oggetto che contiene tutti gli attributi
@@ -14,6 +15,20 @@ const Header = (props) => {
     //così non genera contenuto utile ma evita errori e che si
     //rompa l'app. Così si può togliere anche props dal return 
     //sotto nei nomi degli attributi (props.name, props.links).
+
+    const CheckActive = (link) => {
+        const resolved = useResolvedPath(link);
+        const match = useMatch({ path: resolved.pathname, end: true });
+
+        return match ? styles.active : "";
+    }; //gli hook di react funzionano solo dentro i componenti,
+    //per tantos criviamo checkActive in maiuscolo se no il linter
+    //(regole dello stile di codice) dà problemi perché non capisce
+    //di essere già all'interno di un componente (non vede contesto).
+
+    //Esiste un modo già incluso nella documentazione di react-router
+    //chiamato NavLink per fare il check se un link è attivo e stilarlo
+    //https://reactrouter.com/docs/en/v6/getting-started/tutorial#active-links
 
     return (
         <header className={styles.header}>
@@ -29,7 +44,10 @@ const Header = (props) => {
                             se non far sparire l'errore in console.
                             Ovviamente la key va messa nel tag più
                             alto dell'elemento ripetuto.*/}
-                            <a className="active" href={item.link}>{item.label}</a>
+                            <Link className={CheckActive(item.link)} to={item.link}>{item.label}</Link>
+                            {/*Il tag Link to è come un a href e viene
+                            usato da react-router-dom per link interni,
+                            a livello di html ritorna un tag a normale*/}
                         </li>
                     ))}
                 </ul>
