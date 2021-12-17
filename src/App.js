@@ -21,7 +21,7 @@ import { useReducer } from 'react/cjs/react.development';
 const INIT_STATE = {
   name: "Feisbrut",
   nav: [
-    { link: "/", label: "Home"},
+    { link: "/social-app", label: "Home"},
     { link: "/friends", label: "Friends"},
     { link: "/messages", label: "Messages"},
   ], friendsPreview: []
@@ -29,8 +29,8 @@ const INIT_STATE = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "change-name":
-      return { ...state, name: "Feisbell" }; 
+    // case "change-name":
+    //   return { ...state, name: "Feisbell" }; 
       //creo un nuovo state col nome cambiato
     default:
       return state;
@@ -59,7 +59,7 @@ function App() {
       esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
-        <Route path="/" element={ <Home/> }/>
+        <Route path="/social-app" element={ <Home/> }/>
         <Route path="/messages" element={ <h3>Messages</h3> }/>
         <Route path="/friends" element={ <h3>Friends</h3> }/>
       </Routes>
