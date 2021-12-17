@@ -15,7 +15,7 @@ import { Routes, Route } from "react-router-dom";
 //il resto si importa sull'index.js principale che racchiude l'app.
 
 import Home from "./pages/Home/index.jsx";
-import { useReducer } from 'react/cjs/react.development';
+import { useReducer } from 'react';
 
 
 const INIT_STATE = {
