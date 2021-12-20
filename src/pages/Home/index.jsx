@@ -3,6 +3,7 @@ import styles from "./Home.module.scss";
 import FriendPreview from "../../components/FriendPreview";
 import MessagePreview from "../../components/MessagePreview";
 import Post from "../../components/Post";
+import CreatePost from "../../components/CreatePost";
 import { http } from "./../../libs/http.js";
 
 const friends = [];
@@ -71,6 +72,7 @@ const Home = () => {
                     ))}                    
                 </aside>
                 <main>
+                    <CreatePost />
                     {allPosts.map((post, index) => (
                         <Post key={index} data={post} />
                     ))}

@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/Header/index.jsx';
+import CreatePost from './components/CreatePost';
 import Footer from './components/Footer/index.jsx';
 //viene risolto in quattro modi:
 //- ha trovato ./components/Footer.js
@@ -21,6 +22,7 @@ import { useReducer } from 'react';
 const INIT_STATE = {
   name: "Feisbrut",
   nav: [
+    { link: "/new-post", label: "Create new post"},
     { link: "/social-app", label: "Home"},
     { link: "/friends", label: "Friends"},
     { link: "/messages", label: "Messages"},
@@ -58,6 +60,7 @@ function App() {
       {/* esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
+        <Route path="/new-post" element={ <CreatePost/> }/>
         <Route path="/social-app" element={ <Home/> }/>
         <Route path="/messages" element={ <h3>Messages</h3> }/>
         <Route path="/friends" element={ <h3>Friends</h3> }/>
