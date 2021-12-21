@@ -1,6 +1,7 @@
 import styles from "./CreatePost.module.scss"
 import { httpPOST } from "../../libs/http";
 import { useEffect, useState } from "react";
+import Modal from "../Modal";
 
 const CreatePost = () => {
     //controlled components with hooks
@@ -11,7 +12,6 @@ const CreatePost = () => {
     //AVANZATO
     const [ inputs, setInputs] = useState({});
     const inputChange = (e) => setInputs(state => ({...state, [e.target.name]: e.target.value}));
-
     // const [ authorInput, setAuthorInput ] = useState("");
     // const [ imgInput, setImgInput ] = useState("");
     // const [ messageInput, setMessageInput ] = useState("");
@@ -21,11 +21,26 @@ const CreatePost = () => {
     // const handleAuthorInput = (event) => setAuthorInput(event.target.value);
     // const handleImgInput = (event) => setImgInput(event.target.value);
     // const handleMessageInput = (event) => setMessageInput(event.target.value);
+
+
+    //Esercizio: MODALE
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function showModal() {
+        setIsOpen(true);
+
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 1500);
+    };
+
+    //AL CLICK DEL SEND BUTTON
     const handleSendBtn = (event) => {
         event.preventDefault();
         httpPOST("/posts", formPostObj)
         console.log(formPostObj);
-        alert("post creato!");
+        // alert("post creato!");
+        showModal();
     }
 
     useEffect(() => {
@@ -41,6 +56,9 @@ const CreatePost = () => {
     return (
         <div className={styles.createPost}>
             <form>
+
+                {modalIsOpen ? <Modal color="lightskyblue" message="Post created!"/> : <></>}
+
                 <div className={styles.__author}>
                     <input 
                         value={inputs.author || ""}
@@ -75,7 +93,6 @@ const CreatePost = () => {
                     placeholder="Message"
                     required>
                 </textarea>
-
             </form>
         </div>
     );

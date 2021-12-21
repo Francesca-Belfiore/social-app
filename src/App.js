@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/index.jsx';
-import CreatePost from './components/CreatePost';
+import NewPost from './pages/NewPost';
 import Footer from './components/Footer/index.jsx';
 //viene risolto in quattro modi:
 //- ha trovato ./components/Footer.js
@@ -16,13 +16,15 @@ import { Routes, Route } from "react-router-dom";
 //il resto si importa sull'index.js principale che racchiude l'app.
 
 import Home from "./pages/Home/index.jsx";
+import Messages from "./pages/Messages";
+import Friends from "./pages/Friends";
 import { useReducer } from 'react';
 
 
 const INIT_STATE = {
   name: "Feisbrut",
   nav: [
-    { link: "/new-post", label: "Create new post"},
+    // { link: "/new-post", label: "Create new post"},
     { link: "/social-app", label: "Home"},
     { link: "/friends", label: "Friends"},
     { link: "/messages", label: "Messages"},
@@ -60,10 +62,10 @@ function App() {
       {/* esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
-        <Route path="/new-post" element={ <CreatePost/> }/>
+        <Route path="/new-post" element={ <NewPost/> }/>
         <Route path="/social-app" element={ <Home/> }/>
-        <Route path="/messages" element={ <h3>Messages</h3> }/>
-        <Route path="/friends" element={ <h3>Friends</h3> }/>
+        <Route path="/messages" element={ <Messages/> }/>
+        <Route path="/friends" element={ <Friends/> }/>
       </Routes>
 
       <Footer/>

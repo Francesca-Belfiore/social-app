@@ -3,7 +3,8 @@ import styles from "./Home.module.scss";
 import FriendPreview from "../../components/FriendPreview";
 import MessagePreview from "../../components/MessagePreview";
 import Post from "../../components/Post";
-import CreatePost from "../../components/CreatePost";
+// import CreatePost from "../../components/CreatePost";
+import { Link } from "react-router-dom";
 import { http } from "./../../libs/http.js";
 
 const friends = [];
@@ -43,13 +44,14 @@ const Home = () => {
     //così aggiorniamo solo un elemento della pagina ma per
     //farlo "automaticamnte" abbiamo dovuto crearci uno stato
     //interno e settarlo con useEffect.
+    
     useEffect(() => {
         http("/friends?_limit=4").then((data) => setFriendsPreview(data));
 
         http("/messages?_limit=4").then((data) => setMessagesPreview(data));
 
-        http("/posts").then((data) => setAllPosts(data));
-    }, []);
+        http("/posts").then((data) => setAllPosts(data.reverse()));
+    }, [allPosts]); //AVANZATO: re-render ogni volta che si aggiunge/elimina un post
 
     //così gli elementi vengono caricati man mano che le chiamate rispondono
     //(hanno tempi diversi). Nel caso serva caricare tutto assieme e solo
@@ -72,10 +74,14 @@ const Home = () => {
                     ))}                    
                 </aside>
                 <main>
-                    <CreatePost />
+                    {/* <CreatePost /> */}
+                    
+                    <Link to="/new-post">
+                        <button className={styles.createPostBtn}>Create a new post!</button>
+                    </Link>
                     {allPosts.map((post, index) => (
                         <Post key={index} data={post} />
-                    ))}
+                    ))} 
                 </main>
                 <aside>
                     {messagesPreview.map((message, index) => (
@@ -84,7 +90,7 @@ const Home = () => {
                 </aside>
             </div>
         </section>
-    );
-};
+    ); //è più corretto assegnare alla key l'id del backend anziché
+};//quello generato da js dinamicamente perché è univoco.Es.post.id
 
 export default Home;
