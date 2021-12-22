@@ -1,4 +1,6 @@
 import './App.css';
+// import { useState, useEffect } from 'react';
+
 import Header from './components/Header/index.jsx';
 import NewPost from './pages/NewPost';
 import Footer from './components/Footer/index.jsx';
@@ -18,32 +20,39 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/index.jsx";
 import Messages from "./pages/Messages";
 import Friends from "./pages/Friends";
-import { useReducer } from 'react';
+import Login from './pages/Login';
 
+//USEREDUCER
+// import { useReducer } from 'react';
+// const INIT_STATE = {
+//   name: "Feisbrut",
+//   nav: [
+//     // { link: "/new-post", label: "Create new post"},
+//     { link: "/social-app", label: "Home"},
+//     { link: "/friends", label: "Friends"},
+//     { link: "/messages", label: "Messages"},
+//   ], 
+//   friendsPreview: []
+// }
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "change-name":
+//       return { ...state, name: "Feisbell" }; 
+//       //creo un nuovo state col nome cambiato
+//     default:
+//       return state;
+//       //ritorno lo stato per com'era
+//   }
+// };
 
-const INIT_STATE = {
-  name: "Feisbrut",
-  nav: [
-    // { link: "/new-post", label: "Create new post"},
-    { link: "/social-app", label: "Home"},
-    { link: "/friends", label: "Friends"},
-    { link: "/messages", label: "Messages"},
-  ], friendsPreview: []
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "change-name":
-      return { ...state, name: "Feisbell" }; 
-      //creo un nuovo state col nome cambiato
-    default:
-      return state;
-      //ritorno lo stato per com'era
-  }
-};
+const nav = [
+  { link: "/social-app", label: "Home"},
+  { link: "/friends", label: "Friends"},
+  { link: "/messages", label: "Messages"},
+];
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  // const [state, dispatch] = useReducer(reducer, INIT_STATE);
   //useReducer è come useState ma esplicito
   //il dispatch fa partire l'evento
   //il reducer è come se fosse un event listener
@@ -54,11 +63,17 @@ function App() {
   //c'è un hook di react chiamato useRef che permette di lavorare
   //con un riferimento dentro al DOM per poterlo manipolare.
 
+  const siteName = "Feisbrut";
+  // const [siteName, setSiteName] = useState("Feisbrut");
+  // useEffect(()=> {
+  //   setSiteName(userName);
+  // }, [setUserName]);
+
   return (
     <div>
-      <Header name={state.name} links={state.nav}/>
+      <Header name={siteName} links={nav}/>
 
-      <button onClick={() => dispatch({type:"change-name"})}>Cambia nome</button>
+      {/* <button onClick={() => dispatch({type:"change-name"})}>Cambia nome</button> */}
       {/* esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
@@ -66,6 +81,7 @@ function App() {
         <Route path="/social-app" element={ <Home/> }/>
         <Route path="/messages" element={ <Messages/> }/>
         <Route path="/friends" element={ <Friends/> }/>
+        <Route path="/login" element={ <Login/> }/>
       </Routes>
 
       <Footer/>
