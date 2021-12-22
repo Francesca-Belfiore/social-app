@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
+import CreateFriend from "../../components/CreateFriend";
+import FriendPreview from "./../../components/FriendPreview"
+// import Pagination from "../../components/Pagination";
 import { http } from "./../../libs/http"; 
-import FriendsPreview from "./../../components/FriendPreview"
 import styles from "./Friends.module.scss";
 
 const Friends = () => {
-    const [ friendList, setFriendList ] = useState([]);
+    const [ friendsList, setFriendsList ] = useState([]);
+    // const [ pagination, setPagination ] = useState(1);
 
     useEffect(() => {
-        http("/friends").then((friendList) => setFriendList(friendList));
+        http(`/friends?_page=1`).then((friendsList) => setFriendsList(friendsList));
     }, []);
 
     return (
         <div className={styles.Friends}>
-            {friendList.map((friend) => (
-                <FriendsPreview data={friend} key={friend.id}/>
-            ))}
+            <CreateFriend/>
+            
+            {/* <div>
+                <Pagination/>
+            </div> */}
+
+            <div className={styles.__friendsList}>
+                {friendsList.map((friend) => (
+                    <FriendPreview data={friend} key={friend.id}/>
+                ))}
+            </div>
         </div>
     );
 };
