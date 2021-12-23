@@ -9,9 +9,9 @@
     margin: 20px;
 
     position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-170px);
+    top: -100px;
+    left: calc(50% - 150px);
+
     transition: all 0.35s ease;
 
     color: $white;

@@ -1,8 +1,8 @@
-import styles from "./Post.module.scss";
+import { useState } from "react";
 import RelativeDate from "../date";
 import { httpDELETE } from "../../libs/http";
 import Modal from "../Modal";
-import { useState } from "react";
+import styles from "./Post.module.scss";
 
 const Post = (props) => {
     const data = props.data || {
@@ -30,6 +30,7 @@ const Post = (props) => {
         showModal();
     }
 
+
     return (
         <article className={styles.post}>
             <button className={styles.deleteBtn} onClick={handleDeletePost}>X</button>
@@ -40,7 +41,8 @@ const Post = (props) => {
 
             {data.photo ? <img src={data.photo} alt={data.author} /> : <></> }
 
-            {modalIsOpen ? <Modal color="lightcoral" message="Post deleted!"/> : <></>}
+            {modalIsOpen ? <Modal color="lightcoral" message="Post deleted" top="0"/> 
+                : <Modal color="lightcoral" message="Post deleted" top="-100px"/>}
         </article>
     ); //non si può usare l'if in jsx ma si può usare l'operatore ternario
     //per verificare se il post ha un'immagine ed eventualmente rendirizzarla

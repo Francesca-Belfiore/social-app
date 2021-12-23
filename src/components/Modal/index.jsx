@@ -6,7 +6,7 @@
 import styles from "./Modal.module.scss";
 
 const Modal = (props) => (
-    <p className={styles.Modal} style={{ backgroundColor: props.color }}>{props.message}</p>
+    <p className={styles.Modal} style={{ backgroundColor: props.color, top: props.top }}>{props.message}</p>
 )
 
 export default Modal;

@@ -1,20 +1,28 @@
-// import { useState, useEffect } from "react";
-// import PaginationItem from "../PaginationItem";
-// import { http } from "./../../libs/http";
+import { useState, useEffect } from "react";
+import { http } from "./../../libs/http";
+import { arrayGenerator } from "../../libs/general";
 import styles from "./Pagination.module.scss"
 
-const Pagination = () => {
-    // const [friendsList, setFriendsList] = useState([]);
-    // useEffect(() => {}, []);
+const Pagination = ({ setActualButtonNum }) => {
+    const [ totButtonNum, setTotButtonNum ] = useState([]);
+
+    useEffect(() => {
+        http(`/friends?`).then((friendsList) => {
+            setTotButtonNum(Math.ceil(friendsList.length / 10));
+        });
+    });
 
     return (
-        <ul className={styles.buttonsList}>
-            {/* tot && <PaginationItem pageNumber={1}/> */}
-            {/* {[...Array(parseInt(friendsList.length / 10 + 1)).keys()].map(
-                (buttonNum) => (
-                    <PaginationItem pageNumber={buttonNum}/>
-                )
-            )} */}
+        <ul className={styles.paginationList}>
+            <button className={styles.__prevAndNext}>← Prev</button>
+            {arrayGenerator(totButtonNum).map((index) => (
+                <li key={index}>
+                    <button onClick={() => setActualButtonNum(index + 1)}>
+                        {index + 1}
+                    </button>
+                </li>
+            ))}
+            <button className={styles.__prevAndNext}>Next →</button>
         </ul>
     );
 };

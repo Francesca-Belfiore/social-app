@@ -1,5 +1,5 @@
 import './App.css';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './components/Header/index.jsx';
 import NewPost from './pages/NewPost';
@@ -63,11 +63,14 @@ function App() {
   //c'è un hook di react chiamato useRef che permette di lavorare
   //con un riferimento dentro al DOM per poterlo manipolare.
 
-  const siteName = "Feisbrut";
-  // const [siteName, setSiteName] = useState("Feisbrut");
-  // useEffect(()=> {
-  //   setSiteName(userName);
-  // }, [setUserName]);
+  // const siteName = "Feisbrut";
+  
+  const [siteName, setSiteName] = useState("");
+  <Login setSiteName={setSiteName} />
+  
+  useEffect(() => {
+    console.log(siteName);
+  }, [siteName])
 
   return (
     <div>

@@ -57,7 +57,8 @@ const CreatePost = () => {
         <div className={styles.createPost}>
             <form>
 
-                {modalIsOpen ? <Modal color="lightskyblue" message="Post created!"/> : <></>}
+                {modalIsOpen ? <Modal color="lightskyblue" message="Post created!" top="0"/> 
+                    : <Modal color="lightskyblue" message="Post created!" top="-100px"/>}
 
                 <div className={styles.__author}>
                     <input 
