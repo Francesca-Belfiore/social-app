@@ -5,16 +5,14 @@ import { useEffect, useState } from "react";
 import Modal from "../Modal";
 
 // Esercizio: cambio stato del form con useReducer
-// const init_state = {};
+// const init_state = {author: "", image: "", message: ""};
 
-// const reducer = (inputs, action) => {
-//     const inputChange = (e) => state => ({ ...state, [e.target.name]: e.target.value });
-    
+// const reducer = (state, action) => {    
 //     switch (action.type) {
 //         case "change-input":
-//             return inputChange; 
+//             return { ...state, [action.payload.field]: action.payload.value }; 
 //         default:
-//             return inputs;
+//             return state;
 //     }
 // };
 
@@ -34,7 +32,7 @@ const CreatePost = () => {
         const handleAuthorInput = (event) => setAuthorInput(event.target.value);
     */
 
-    // const [inputs, dispatch] = useReducer(reducer, init_state);
+    // const [state, dispatch] = useReducer(reducer, init_state);
 
     const [formPostObj, setFormPostOnj] = useState({});
 
@@ -79,7 +77,7 @@ const CreatePost = () => {
                     <input
                         value={inputs.author || ""}
                         onChange={inputChange}
-                        // onChange={dispatch({type:"change-input"})}
+                        // onChange={(e) => dispatch({type:"change-input", payload: {field: "name", value: e.target.value}})}
                         type="text"
                         name="author"
                         id="author"
@@ -89,7 +87,7 @@ const CreatePost = () => {
                     <input
                         value={inputs.image || ""}
                         onChange={inputChange}
-                        // onChange={dispatch({type:"change-input"})}
+                        // onChange={(e) => dispatch({type:"change-input", payload: {field: "name", value: e.target.value}})}
                         type="text"
                         name="image"
                         id="image"
@@ -104,7 +102,7 @@ const CreatePost = () => {
                 <textarea
                     value={inputs.message || ""}
                     onChange={inputChange}
-                    // onChange={dispatch({type:"change-input"})}
+                    // onChange={(e) => dispatch({type:"change-input", payload: {field: "name", value: e.target.value}})}
                     name="message"
                     id="message"
                     cols="30"

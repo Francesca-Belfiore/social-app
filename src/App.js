@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 
 import Header from './components/Header/index.jsx';
 import NewPost from './pages/NewPost';
@@ -17,10 +17,22 @@ import { Routes, Route } from "react-router-dom";
 //libreria per creare route lato client (come avevamo fatto con #)
 //il resto si importa sull'index.js principale che racchiude l'app.
 
-import Home from "./pages/Home/index.jsx";
-import Messages from "./pages/Messages";
-import Friends from "./pages/Friends";
-import Login from './pages/Login';
+//CODE SPLITTING IN CHUNK E (LAZY) LOADING DINAMICO CON SUSPENCE
+import Loading from "./components/Loading";
+//mentre le pagine caricano viene mostrato il componente Loading.
+//il lazy loading permette all'utente di scaricare solo le parti di sito
+//che gli servono man mano che gli servono.
+//il caricamento dei componenti viene diviso in chunks tramite i metodi
+//di react Suspense e lazy che li gestiscono come fossero una promise.
+//lazy è un'utility di react che wrappa i componenti, mentre la funzione
+//import() è uno standard. (ottimizzazione con split dinamico)
+const Home = lazy(() => import("./pages/Home/index.jsx"));
+const Messages = lazy(() => import("./pages/Messages"));
+const Friends = lazy(() => import("./pages/Friends"));
+const Login = lazy(() => import(/* webPackChunkName: "home" */'./pages/Login'));
+//per dare un nome ai chunk senza fare eject e modificare direttamente webpack.
+//la cartella webpack è nascosta di default in react e per lavorarci bisogna prima
+//usare il comando eject che è irreversibile.
 
 //USEREDUCER
 // import { useReducer } from 'react';
@@ -80,11 +92,11 @@ function App() {
       {/* esempio bottone che cambia titolo alla pagina con useReducer */}
       
       <Routes>
-        <Route path="/new-post" element={ <NewPost/> }/>
-        <Route path="/social-app" element={ <Home/> }/>
-        <Route path="/messages" element={ <Messages/> }/>
-        <Route path="/friends" element={ <Friends/> }/>
-        <Route path="/login" element={ <Login/> }/>
+        <Route path="/social-app" element={ <Suspense fallback={<Loading/>}><Home/></Suspense> }/>
+        <Route path="/new-post" element={ <Suspense fallback={<Loading/>}><NewPost/></Suspense> }/>
+        <Route path="/messages" element={ <Suspense fallback={<Loading/>}><Messages/></Suspense> }/>
+        <Route path="/friends" element={ <Suspense fallback={<Loading/>}><Friends/></Suspense> }/>
+        <Route path="/login" element={ <Suspense fallback={<Loading/>}><Login/></Suspense> }/>
       </Routes>
 
       <Footer/>
