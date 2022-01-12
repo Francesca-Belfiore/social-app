@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+//testing-library è una delle librerie più utilizzate per il testing
 import App from './App';
 
 test('renders learn react link', () => {

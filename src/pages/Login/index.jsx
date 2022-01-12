@@ -1,27 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Login.module.scss"
+import { useNavigate } from "react-router-dom"; //sostituisce useHistory in  react-router-dom v6
 
 const Login = (props) => {
-    const handleSendBtn = (event) => {
-        event.preventDefault();
-        setLoginData({
-            userName,
-            userPass
-        });
-        alert("Login effettuato!");
-        window.location.href = "/social-app";
-    };
-    
+
+    let navigate = useNavigate();
+
     const [ userName, setUserName] = useState("");
     const [ userPass, setUserPass] = useState("");
-    const [ loginData, setLoginData ] = useState({});
 
-    useEffect(() => {
-        userName && console.log(loginData.userName);
-    }, [userName, loginData]);
+    const handleSendBtn = (event) => {
+        event.preventDefault();
+        props.setSiteName(userName);
+
+        alert("Login effettuato!"); //da sostituire con una modale
+        // window.location.href = "/social-app"; redirect "esterno", non preserva il nome
+        navigate('/social-app'); //redirect alla home page dell'app con routing interno
+    };
 
     return (
-        <form className={styles.Login} onSubmit={() => props.setSiteName(loginData.userName)}>
+        <form className={styles.Login}>
             <input 
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)} 

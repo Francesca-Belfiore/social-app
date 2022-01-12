@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, Suspense, lazy } from 'react';
 
 import Header from './components/Header/index.jsx';
 import NewPost from './pages/NewPost';
@@ -61,6 +61,7 @@ const nav = [
   { link: "/social-app", label: "Home"},
   { link: "/friends", label: "Friends"},
   { link: "/messages", label: "Messages"},
+  { link: "/login", label: "Login"}
 ];
 
 function App() {
@@ -77,12 +78,7 @@ function App() {
 
   // const siteName = "Feisbrut";
   
-  const [siteName, setSiteName] = useState("");
-  <Login setSiteName={setSiteName} />
-  
-  useEffect(() => {
-    console.log(siteName);
-  }, [siteName])
+  const [siteName, setSiteName] = useState("Feisbrut");
 
   return (
     <div>
@@ -96,7 +92,7 @@ function App() {
         <Route path="/new-post" element={ <Suspense fallback={<Loading/>}><NewPost/></Suspense> }/>
         <Route path="/messages" element={ <Suspense fallback={<Loading/>}><Messages/></Suspense> }/>
         <Route path="/friends" element={ <Suspense fallback={<Loading/>}><Friends/></Suspense> }/>
-        <Route path="/login" element={ <Suspense fallback={<Loading/>}><Login/></Suspense> }/>
+        <Route path="/login" element={ <Suspense fallback={<Loading/>}><Login setSiteName={setSiteName}/></Suspense> }/>
       </Routes>
 
       <Footer/>

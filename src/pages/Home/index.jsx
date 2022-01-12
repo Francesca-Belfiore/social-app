@@ -26,9 +26,10 @@ const Home = () => {
     //friendsPreview chiamerò il setter setFriendsPreview.
 
     //GETTER -> const friendPreview = []
-    //il getter costituisce il valore iniziale
+    //il getter costituisce il valore da osservare
     //SETTER -> firenPreview = [...]
-    //Il setter cambia il valore dei dati del getter.
+    //Il setter cambia il valore dei dati del getter (metodo).
+    //il valore tra le parentesi di useState è lo stato iniziale
 
     // fetch("https://edgemony-backend.herokuapp.com/friends?_limit=4")
     //     .then((response) => response.json())
